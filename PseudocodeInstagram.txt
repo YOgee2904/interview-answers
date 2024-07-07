@@ -1,0 +1,20 @@
+class InstagramPost:
+    private properties:
+        - String content
+        - String author
+        - int likes
+        - List<String> comments
+        - DateTime timestamp
+
+    public methods:
+        - constructor(content, author)
+        - void likePost()
+        - void addComment(String comment)
+        - String getContent()
+        - String getAuthor()
+        - int getLikes()
+        - List<String> getComments()
+        - DateTime getTimestamp()
+
+    private methods:
+        - void updateTimestamp()
