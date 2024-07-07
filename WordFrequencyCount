@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class WordFrequencyCounter {
+
+    public static void main(String[] args) {
+        File file = new File("essay.txt");
+        Map<String, Integer> wordCounts = new HashMap<>();
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                String word = scanner.next().toLowerCase().replaceAll("[^a-zA-Z]", "");
+                wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+            return;
+        }
+
+        wordCounts.forEach((word, count) -> System.out.println(word + ": " + count));
+    }
+}
