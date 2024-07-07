@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class SentenceEncoder {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the key: ");
+        int key = scanner.nextInt();
+        scanner.nextLine();  // Consume newline left-over
+        System.out.print("Enter the sentence: ");
+        String sentence = scanner.nextLine();
+
+        String[] words = sentence.split(" ");
+        StringBuilder encodedSentence = new StringBuilder();
+
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            if (i % 2 == 0) {
+                // Odd position (0-indexed)
+                encodedSentence.append(shiftLetters(word, key)).append(" ");
+            } else {
+                // Even position (0-indexed)
+                word = new StringBuilder(word).reverse().toString();
+                encodedSentence.append(shiftLetters(word, key)).append(" ");
+            }
+        }
+
+        System.out.println(encodedSentence.toString().trim());
+    }
+
+    private static String shiftLetters(String word, int key) {
+        StringBuilder shiftedWord = new StringBuilder();
+        for (char c : word.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isLowerCase(c) ? 'a' : 'A';
+                c = (char) ((c - base + key) % 26 + base);
+            }
+            shiftedWord.append(c);
+        }
+        return shiftedWord.toString();
+    }
+}
